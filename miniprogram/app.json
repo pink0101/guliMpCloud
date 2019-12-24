@@ -6,8 +6,8 @@
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "慕课支付",
+    "navigationBarBackgroundColor": "#ffe582",
+    "navigationBarTitleText": "故里支付",
     "navigationBarTextStyle": "black"
   },
   "sitemapLocation": "sitemap.json"

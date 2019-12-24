@@ -36,7 +36,7 @@ module.exports = {
     for (var i = 0; i < 5; i++) {
       text += possible.charAt(Math.floor(Math.random() * possible.length))
     }
-    return 'ImoocMpCloud' + date + text;
+    return 'GuLiMpCloud' + date + text;
   },
   // 根据对象生成签名
   getSign(params, key) {

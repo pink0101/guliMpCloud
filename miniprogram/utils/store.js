@@ -1,7 +1,7 @@
 /**
  * Storage通用存储文件定义
  */
-const STORAGE_KEY = 'imooc-pay';
+const STORAGE_KEY = 'guli-pay';
 module.exports = {
   // 设置值
   setItem(key,value,module_name){

@@ -57,7 +57,7 @@ Page({
   },
   onShareAppMessage(){ // 自定义分享内容
     return {
-      title:'欢迎体验慕课支付',
+      title:'欢迎体验猫南北网络工作室支付',
       path:'/pages/index/index',
       imageUrl: '/assets/images/share_mp_logo.png'
     }

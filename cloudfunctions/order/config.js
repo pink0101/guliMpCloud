@@ -1,10 +1,10 @@
 module.exports = {
-  mchId: '',
-  key: '',
-  appId: 'wxf29117352109ab65',
-  appSecret: '',
-  body:"欢迎学习慕课首门小程序云开发支付专项课程。",
-  notifyUrl:"http://m.51purse.com/api/wechat/pay/callback",
-  attach:"微信支付课程体验",
+  mchId: '',// 商户号
+  key: '', // api密钥
+  appId: '', // 小程序api
+  appSecret: '', // 小程序密钥
+  body:"欢迎体验猫南北网络工作室支付。",
+  notifyUrl:"http://hongshanit.com/api/wechat/pay/callback",
+  attach:"故里支付",
   ip:'127.0.0.1'
 }

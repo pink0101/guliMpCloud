@@ -6,7 +6,7 @@ let store = require('../utils/store.js')
 let system = store.getSystemInfo();
 const clientInfo = {
   'clientType':'mp',
-  'appnm':'imoocpay',
+  'appnm':'gulipay',
   'model': system.model,
   'os': system.system,
   'screen': system.screenWidth + '*' + system.screenHeight,

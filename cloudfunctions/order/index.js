@@ -58,6 +58,7 @@ let getPayParams = function (appId, prepayId) {
     signType: 'MD5',
     timeStamp: timeStamp
   }
+  // 根据对象生成签名
   let paySign = util.getSign(params, config.key);
   // 前端需要的所有数据, 都从这里返回过去
   params.paySign = paySign;
@@ -68,7 +69,7 @@ exports.main = function (event, context) {
   console.log('event:' + JSON.stringify(event));
   let {appId, attach, body, mchId, notifyUrl, ip} = config;
   let openId = wxContext.OPENID;
-  let totalFee = event.totalFee;
+  let totalFee = event.totalFee; // 从用户端传过来金额
   let nonceStr = util.createNonceStr();
   let tradeId = util.getTradeId();
   // 支付前需要先获取签名
@@ -76,8 +77,9 @@ exports.main = function (event, context) {
   // 将签名一起组装成post数据，通过xml的格式发送给微信
   let sendData = wxSendData(appId, attach, body, mchId, nonceStr, notifyUrl, openId, tradeId, ip, totalFee, sign);
   console.log("sendData:::" + sendData);
-  return new Promise((resolve,reject)=>{
-    let url = "https://api.mch.weixin.qq.com/pay/unifiedorder";
+  return new Promise((resolve,reject)=>{ 
+    // 商户在小程序中先调用该接口在微信支付服务后台生成预支付交易单，返回正确的预支付交易后调起支付。
+    let url = "https://api.mch.weixin.qq.com/pay/unifiedorder"; // 接口地址
     request({
       url: url,
       method: 'POST',

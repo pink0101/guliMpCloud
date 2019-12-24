@@ -18,52 +18,61 @@ Page({
       index: data.amount,
     });
   },
+  // 微信支付
   pay() {
-    // 调用云函数
-    wx.cloud.callFunction({
-      name: 'order',
-      data: {
-        totalFee: this.data.index
-      },
-      success: res => {
-        res = res.result;
-        if (res) {
-          // 支付
-          wx.requestPayment({
-            timeStamp: res.timeStamp,
-            nonceStr: res.nonceStr,
-            package: res.package,
-            signType: res.signType,
-            paySign: res.paySign,
-            success: function (errmsg) {
-              if (errmsg == 'requestPayment:ok') {
-                wx.showToast({
-                  title: '支付成功',
-                  icon: 'success'
-                });
+    let index = this.data.index
+    if (/^\d*$/.test(index) && index > 0) {
+      // 调用云函数
+      wx.cloud.callFunction({
+        name: 'order',
+        data: {
+          totalFee: this.data.index
+        },
+        success: res => {
+          res = res.result;
+          if (res) {
+            // 支付
+            wx.requestPayment({
+              timeStamp: res.timeStamp,
+              nonceStr: res.nonceStr,
+              package: res.package,
+              signType: res.signType,
+              paySign: res.paySign,
+              success: function (errmsg) {
+                if (errmsg == 'requestPayment:ok') {
+                  wx.showToast({
+                    title: '支付成功',
+                    icon: 'success'
+                  });
+                }
+              },
+              fail: function (res) {
+                if (res.errMsg == 'requestPayment:fail cancel') {
+                  wx.showToast({
+                    title: '支付取消',
+                    icon: 'none'
+                  });
+                } else {
+                  wx.showToast({
+                    title: res.errmsg,
+                    icon: 'none'
+                  });
+                }
               }
-            },
-            fail: function (res) {
-              if (res.errMsg == 'requestPayment:fail cancel') {
-                wx.showToast({
-                  title: '支付取消',
-                  icon: 'none'
-                });
-              } else {
-                wx.showToast({
-                  title: res.errmsg,
-                  icon: 'none'
-                });
-              }
-            }
+            })
+          }
+        },
+        fail: err => {
+          wx.showToast({
+            title: err.errMsg
           })
         }
-      },
-      fail: err => {
-        wx.showToast({
-          title: err.errMsg
-        })
-      }
-    })
+      })
+    }else{
+      wx.showToast({
+        title: '请输入正确的金额',
+        icon: 'none'
+      })
+    }
   }
 })
